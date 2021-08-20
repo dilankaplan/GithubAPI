@@ -20,13 +20,17 @@ function getData(e){
      github.getGithubData(username)
      .then(response=> {
          if(response.user.message === "Not Found"){
-             console.log("Hata");
+             ui.showErrror("Kullanıcı bulunamadı.");
          }
          else{
+             ui.addSearchedUserToUI(username);
+
+             Storage.addSearchedUserToStorage(username);
              ui.showUserInfo(response.user);
-         }
+             ui.showRepoInfo(response.repo);
+            }
      })
-     .catch(err=>console.log(err));
+     .catch(err=>ui.showErrror(err));
   }
 
     ui.clearInput();
@@ -36,5 +40,11 @@ function clearAllSearch(){
 
 }
 function getAllSearched(){
+    let users =Storage.getSearchedUsersFromStorage();
+    let result="";
+    users.forEach(user =>{
+        result += `<li class="list-group-item">${user}</li>`;
+    });
+    lastUsers.innerHTML = result;
 
 }
