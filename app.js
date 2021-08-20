@@ -3,7 +3,7 @@ const nameInput =document.getElementById("githubname");
 const clearLastUsers= document.getElementById("clear-last-users");
 const lastUsers =document.getElementById("last-users");
 const github= new Github();
-
+const ui =new UI();
 eventListener();
 
 function eventListener(){
@@ -23,13 +23,13 @@ function getData(e){
              console.log("Hata");
          }
          else{
-             console.log(response);
+             ui.showUserInfo(response.user);
          }
      })
      .catch(err=>console.log(err));
   }
 
-
+    ui.clearInput();
     e.preventDefault();
 }
 function clearAllSearch(){
