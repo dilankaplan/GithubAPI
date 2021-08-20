@@ -37,6 +37,11 @@ function getData(e){
     e.preventDefault();
 }
 function clearAllSearch(){
+    if(confirm("Emin Misiniz?")){
+        Storage.clearAllSearchedFromStorage();
+        ui.clearAllSearchedFromUI();
+    }
+
 
 }
 function getAllSearched(){
